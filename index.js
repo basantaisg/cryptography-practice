@@ -16,12 +16,12 @@ console.log("\n \n ------------------------ gg ------------------ \n \n");
 
 // ECDSA practice with examples
 const EC = require("elliptic").ec;
-const ec = new EC();
+const ec = new EC("secp256k1");
 
 const key = ec.genKeyPair();
 
 // let's printout the key!
-console.log("key: ", key);
+// console.log("key: ", key.getPublic());
 
 // rest
 console.log("\n \n ------------------------ gg ------------------ \n \n");
@@ -29,7 +29,7 @@ console.log("\n \n ------------------------ gg ------------------ \n \n");
 const message = "Hi, Fuck You!";
 
 // First hashing the message!
-const hashedMessage = crypto.createHash("sha256").update(message).digest("hex");
+const hashedMessage = crypto.createHash("sha256").update(message).digest();
 
 const signature = key.sign(hashedMessage);
 
