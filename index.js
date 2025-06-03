@@ -12,27 +12,35 @@ console.log(`Keccak256 hash: ${keccakHash}`);
 
 // --------------- Section 2 ----------------
 
+console.log("\n \n ------------------------ gg ------------------ \n \n");
+
 // ECDSA practice with examples
 const EC = require("elliptic").ec;
-const ec = new EC("secp256k1");
+const ec = new EC();
 
-// generating a keypair!
 const key = ec.genKeyPair();
 
-const message = "Hey fuck off!";
-const msgHash = crypto.createHash("sha256").update(message).digest();
+// let's printout the key!
+console.log("key: ", key);
 
-const signature = key.sign(msgHash);
+// rest
+console.log("\n \n ------------------------ gg ------------------ \n \n");
 
-console.log(
-  `Signature: ${{
-    r: signature.r.toString("hex"),
-    s: signature.s.toString("hex"),
-  }}`
-);
+const message = "Hi, Fuck You!";
 
-// verifying signature:
+// First hashing the message!
+const hashedMessage = crypto.createHash("sha256").update(message).digest("hex");
 
+const signature = key.sign(hashedMessage);
+
+console.log("Signature: ", {
+  r: signature.r.toString("hex"),
+  s: signature.s.toString("hex"),
+});
+
+// verifying the signature
 const pubKey = key.getPublic();
-const valid = ec.keyFromPublic(pubKey).verify(msgHash, signature);
-console.log(`Signature valid: ${valid}`);
+const validSignature = ec
+  .keyFromPublic(pubKey)
+  .verify(hashedMessage, signature);
+console.log(`ValidSignature: ${validSignature}`);
