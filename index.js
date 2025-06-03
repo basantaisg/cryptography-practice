@@ -2,7 +2,7 @@ const crypto = require("crypto");
 
 // SHA256 hashing algo is mainly used on Bitcoin and is based on SHA-2
 const data = "basanta is a beast";
-const hash = crypto.createHash("sha256").update(data).digest("hex");
+const hash = crypto.createHash("sha256").update(data).digest("binary");
 console.log(`SHA256: ${hash}`);
 
 // Keccak256 hasing with 'keccak' is mainly used in Ethereum based hashing like generation of the public private keys!
